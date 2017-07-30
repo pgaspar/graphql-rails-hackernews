@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# Generate a couple links
+Link.create url: 'http://graphql.org/', description: 'The Best Query Language'
+Link.create url: 'http://dev.apollodata.com/', description: 'Awesome GraphQL Client'
