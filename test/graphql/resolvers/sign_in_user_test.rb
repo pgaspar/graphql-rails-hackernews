@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Resolvers::SignInUserTest < ActiveSupport::TestCase
   def perform(args = {})
-    Resolvers::SignInUser.new.call(nil, args, nil)
+    Resolvers::SignInUser.new.call(nil, args, @ctx)
   end
 
   setup do
@@ -11,6 +11,7 @@ class Resolvers::SignInUserTest < ActiveSupport::TestCase
       email: 'email@example.com',
       password: 'something'
     )
+    @ctx = { session: {} }
   end
 
   test 'creates a token' do
@@ -21,6 +22,7 @@ class Resolvers::SignInUserTest < ActiveSupport::TestCase
 
     assert result.present?
     assert result.token.present?
+    assert_equal @ctx[:session][:token], result.token
     assert_equal result.user, @user
   end
 
