@@ -11,5 +11,9 @@ class Resolvers::CreateUser < GraphQL::Function
       email: args[:email],
       password: args[:password],
     )
+  rescue ActiveRecord::RecordInvalid => e
+    GraphQL::ExecutionError.new(
+      "Invalid input: #{e.record.errors.full_messages.join(', ')}"
+    )
   end
 end

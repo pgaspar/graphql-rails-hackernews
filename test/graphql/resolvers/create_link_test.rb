@@ -25,4 +25,14 @@ class Resolvers::CreateLinkTest < ActiveSupport::TestCase
     assert_equal link.user, @user
     assert_equal link.votes, []
   end
+
+  test 'creating new invalid link' do
+    result = perform(
+      url: '',
+      description: '',
+    )
+
+    assert_equal result.class, GraphQL::ExecutionError
+    assert result.message.include?('Invalid input')
+  end
 end
