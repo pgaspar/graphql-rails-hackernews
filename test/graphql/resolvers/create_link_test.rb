@@ -23,5 +23,6 @@ class Resolvers::CreateLinkTest < ActiveSupport::TestCase
     assert_equal link.description, 'description'
     assert_equal link.url, 'http://example.com'
     assert_equal link.user, @user
+    assert_equal link.votes, []
   end
 end
